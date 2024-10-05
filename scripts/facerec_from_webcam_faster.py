@@ -5,7 +5,7 @@ import os
 import yaml
 
 
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(2)
 
 global known_face_encodings, known_face_names
 
@@ -33,7 +33,7 @@ def load_templates_dataset(templates_dir_path):
 
     print(f'Total known face encodings: {len(known_face_encodings)}')
     print(f'Total known face names: {len(known_face_names)}')
-    print(f'Known face names: {known_face_names}')
+    #print(f'Known face names: {known_face_names}')
     print('----------')
             
 
@@ -49,6 +49,10 @@ def run_with_face_recognition():
     while True:
         # Grab a single frame of video
         _, frame = video_capture.read()
+
+        if frame is None:
+            print('Could not read frame from video capture')
+            break
 
         # Only process every other frame of video to save time
         if is_processing_frame:

@@ -3,7 +3,7 @@ numpy==1.21.6
 matplotlib==3.5.1
 jupyterlab==3.0.16
 Pillow==8.0.1
-opencv-python==4.4.0.44
+opencv-python==4.10.0.84 # 4.4.0.44
 tqdm==4.65.0
 scikit-image==0.18.3
 dlib==19.22
