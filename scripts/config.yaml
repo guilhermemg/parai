@@ -1,7 +1,7 @@
 
-# templates_dir: /home/guilherme/projects/parai/app/data/templates/df_templates_dlib
+# templates_dir: /home/guilherme/projects/parai/data/templates/df_templates_dlib
 # framework: deepface
 
-templates_dir: /home/guilherme/projects/parai/app/data/templates/fr_templates
+templates_dir: /home/guilherme/projects/parai/data/templates/fr_templates
 framework: face_recognition
 

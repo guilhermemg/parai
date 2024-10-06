@@ -5,7 +5,7 @@ import os
 import yaml
 
 
-video_capture = cv2.VideoCapture(2)
+video_capture = cv2.VideoCapture(0)
 
 global known_face_encodings, known_face_names
 
@@ -60,7 +60,6 @@ def run_with_face_recognition():
             small_frame = cv2.resize(frame, (0, 0), fx=1/SCALING_FACTOR, fy=1/SCALING_FACTOR)
 
             # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
-            #rgb_small_frame = small_frame[:, :, ::-1]
             rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
             
             # Find all the faces and face encodings in the current frame of video
@@ -75,16 +74,6 @@ def run_with_face_recognition():
                 name = "Unknown"
                 face_dist = -1
 
-                #print(f'Matches: {matches[:10]}')
-                #print(f'Face Distances: {face_distances[:10]}')
-                
-                # If a match was found in known_face_encodings, just use the first one.
-                #if True in matches:
-                #    first_match_index = matches.index(True)
-                #    name = known_face_names[first_match_index]
-                    
-                # Or instead, use the known face with the smallest distance to the new face
-                # else:
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
                     name = known_face_names[best_match_index]
@@ -111,15 +100,13 @@ def run_with_face_recognition():
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom + 30), font, 1.0, (255, 255, 255), 1)
             cv2.putText(frame, f'Distance: {round(f_dist, 5)}', (left + 6, bottom + 60), font, 1.0, (255, 255, 255), 1)
-            #cv2.putText(frame, f'Distance: {round(f_dist,5)}', (40, 70), font, 1.0, (0, 0, 255), 1)
             cv2.putText(frame, f'Frame Number: {frame_number}', (40, 40), font, 1.0, (0, 0, 255), 1)
 
             print(f'face_distances[0]: {f_dist}')
 
         # Display the resulting image
         cv2.imshow('Video', frame)
-        #cv2.moveWindow('Video', 100, 150)        
-
+        
         # Hit 'q' on the keyboard to quit!
         if (cv2.waitKey(1) & 0xFF == ord('q')):
             break
