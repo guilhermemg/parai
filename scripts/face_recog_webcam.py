@@ -19,14 +19,8 @@ def load_templates_dataset(templates_dir_path):
     known_face_encodings = [np.load(os.path.join(templates_dir_path, template_path)) for template_path in templates_paths]
     known_face_names = [template_path.split('.')[0] for template_path in templates_paths]
 
-    final_encodings, final_names = [], []
-    for enc, name in zip(known_face_encodings, known_face_names):
-        if 'guilherme' in name:
-            final_encodings.append(enc)
-            final_names.append(name)
-    
-    final_encodings = final_encodings + known_face_encodings[:N_SUBJS_TO_LOAD]
-    final_names = final_names + known_face_names[:N_SUBJS_TO_LOAD]
+    final_encodings = known_face_encodings[:N_SUBJS_TO_LOAD]
+    final_names = known_face_names[:N_SUBJS_TO_LOAD]
 
     known_face_encodings = final_encodings
     known_face_names = final_names
